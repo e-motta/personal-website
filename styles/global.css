@@ -25,3 +25,21 @@ img {
   max-width: 100%;
   display: block;
 }
+
+pre {
+  background-color: rgb(42, 42, 42);
+  border-radius: 10px;
+}
+
+pre code {
+  font-size: 0.9rem;
+  color: white;
+  display: block;
+  background: none;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100px;
+  padding: 15px;
+}
