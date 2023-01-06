@@ -7,9 +7,8 @@ date: "2019-08-29"
 
 The goal of this blog is to document my evolution as a software developer and data analyst. I will mostly write about more technical subjects, but before that an introduction and a foreword are appropriate.
 
----
+&nbsp;
 
-\
 I’m 31 years old and I’ve recently decided to change careers, after being a lawyer in Brazil for five years. I was growing more and more unhappy and dissatisfied with my job and with the legal field in general, and the thought of leaving everything behind started occurring to me a few months ago.
 
 Back in 2016 I’d already taken an ‘Introduction to Computer Science and Programming Using Python’ course from MIT at edX. I’m currently enrolled in a Master in Legal Tech program at IE University, where technology plays a big part, including programming classes. So I know the fundamentals.
@@ -22,7 +21,6 @@ I started to learn more about the basics of both, reading broadly, watching a nu
 
 I’m only taking the first steps and there is a long journey in front of me, but it was enough to give me the courage to actually quit my current job. I gave notice about two weeks ago.
 
----
+&nbsp;
 
-\
 Anyway, now the idea is to get a better grasp of the fields I’m interested in, so I I'll likely try other sources of information along the way, or even different areas within the tech field, before I choose a more specific path. In the next posts I’ll write more about my progress so far and in the future.
