@@ -1,4 +1,7 @@
-## How to use Firestore with Redux in a React application
+---
+title: "How to use Firestore with Redux in a React application"
+date: "2023-01-09"
+---
 
 ![Photo by [Lautaro Andreani](https://unsplash.com/@lautaroandreani?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://cdn-images-1.medium.com/max/9012/0*WNb40yO0ma4mKbC3)
 
