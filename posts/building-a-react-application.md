@@ -1,6 +1,6 @@
 ---
 title: "Building a React Application: 'Where's Wally?'"
-date: "2022-01-05"
+date: "2023-01-05"
 ---
 
 I've been working as a fullstack (mostly backend) developer for a little more than a year now.
