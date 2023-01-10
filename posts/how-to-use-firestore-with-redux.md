@@ -66,63 +66,64 @@ For this post we’ll implement one slice that will fetch and update data relate
 
 In this example, we’re creating a file called **scoresSlice.ts**:
 
-    // src/features/scores/scoresSlice.ts
-    import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
-    import {
-      arrayUnion,
-      collection,
-      doc,
-      updateDoc,
-      getDocs,
-    } from 'firebase/firestore';
-    import { firestoreApi } from '../../app/firestoreApi';
-    import { firestore } from '../../firebase';
-    import { ScoresTable, ScoresTables } from '../../types';
+```Typescript
+// src/features/scores/scoresSlice.ts
+import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  arrayUnion,
+  collection,
+  doc,
+  updateDoc,
+  getDocs,
+} from 'firebase/firestore';
+import { firestore } from '../../firebase';
+import { ScoresTable, ScoresTables } from '../../types';
 
-    export const firestoreApi = createApi({
-      baseQuery: fakeBaseQuery(),
-      tagTypes: ['Score'],
-      endpoints: (builder) => ({
-        fetchHighScoresTables: builder.query<ScoresTables, void>({
-          async queryFn() {
-            try {
-              const ref = collection(firestore, 'scoresTables');
-              const querySnapshot = await getDocs(ref);
-              let scoresTables: ScoresTables = [];
-              querySnapshot?.forEach((doc) => {
-                scoresTables.push({ id: doc.id, ...doc.data() } as ScoresTable);
-              });
-              return { data: scoresTables };
-            } catch (error: any) {
-              console.error(error.message);
-              return { error: error.message };
-            }
-          },
-          providesTags: ['Score'],
-        }),
-        setNewHighScore: builder.mutation({
-          async queryFn({ scoresTableId, newHighScore }) {
-            try {
-              await updateDoc(doc(firestore, 'scoresTables', scoresTableId), {
-                scores: arrayUnion(newHighScore),
-              });
-              return { data: null };
-            } catch (error: any) {
-              console.error(error.message);
-              return { error: error.message };
-            }
-          },
-          invalidatesTags: ['Score'],
-        }),
-      }),
-    });
+export const firestoreApi = createApi({
+  baseQuery: fakeBaseQuery(),
+  tagTypes: ['Score'],
+  endpoints: (builder) => ({
+    fetchHighScoresTables: builder.query<ScoresTables, void>({
+      async queryFn() {
+        try {
+          const ref = collection(firestore, 'scoresTables');
+          const querySnapshot = await getDocs(ref);
+          let scoresTables: ScoresTables = [];
+          querySnapshot?.forEach((doc) => {
+            scoresTables.push({ id: doc.id, ...doc.data() } as ScoresTable);
+          });
+          return { data: scoresTables };
+        } catch (error: any) {
+          console.error(error.message);
+          return { error: error.message };
+        }
+      },
+      providesTags: ['Score'],
+    }),
+    setNewHighScore: builder.mutation({
+      async queryFn({ scoresTableId, newHighScore }) {
+        try {
+          await updateDoc(doc(firestore, 'scoresTables', scoresTableId), {
+            scores: arrayUnion(newHighScore),
+          });
+          return { data: null };
+        } catch (error: any) {
+          console.error(error.message);
+          return { error: error.message };
+        }
+      },
+      invalidatesTags: ['Score'],
+    }),
+  }),
+});
 
-    export const {
-      useFetchHighScoresTablesQuery,
-      useSetNewHighScoreMutation,
-    } = scoresApi;
+export const {
+  useFetchHighScoresTablesQuery,
+  useSetNewHighScoreMutation,
+} = firestoreApi;
+```
 
-\*_A note: The way things are set up here, Firestore rules need to be open for read and write by everyone, which is not recommended for production. A better a approach would be calling Firebase Functions to perform operations on Firestore, but since they don’t offer a free version for that, for the sake of this example project I chose to leave things as they are shown here._
+\*_A note: The way things are set up here, Firestore rules need to be open for read and write by everyone, which is not recommended for production. A better approach would be calling Firebase Functions to perform operations on Firestore, but since they don’t offer a free version for that, for the sake of this example project I chose to leave things as they are shown here._
 
 The createApi function takes an object with **_baseQuery_** and **_endpoints_**. In this example we’re also adding optional **_tagTypes_**. RTK Query will automatically generate **React** **hooks** so that we can use the queries and mutations.
 
@@ -160,7 +161,7 @@ After defining **_firestoreApi_** with the **_createApi_** function, RTK Query w
 
 As per the documentation: “A React hook that automatically triggers fetches of data from an endpoint, ‘subscribes’ the component to the cached data, and reads the request status and cached data from the Redux store. The component will re-render as the loading status changes and the data becomes available.”
 
-In the example above, it generated the **_useFetchHighScoresTablesQuery_** and **_useSetNewHighScoreMutation _**hooks. We can use them just like any other React hook (inside function components, or inside other custom hooks).
+In the example above, it generated the **_useFetchHighScoresTablesQuery_** and **_useSetNewHighScoreMutation_** hooks. We can use them just like any other React hook (inside function components, or inside other custom hooks).
 
 The _use…Query_ hook will return an object with the data and the query properties.
 
