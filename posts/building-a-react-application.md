@@ -39,7 +39,8 @@ One thing I learned the hard way is that it’s always better to think (a lot) b
 
 ### The information flow as the user interacts with the app
 
-![Information flowchart](https://cdn-images-1.medium.com/max/5308/1*WqgZGoTckmnbM9BgSLunpw.png)
+<img src="https://cdn-images-1.medium.com/max/5308/1*WqgZGoTckmnbM9BgSLunpw.png" alt="Information flowchart" width="612"/>
+<small>Information flowchart</small>
 
 While React is declarative (meaning we code by describing the final state of the UI, not step-by-step instructions), I found that by thinking about the flow of information I could more easily figure out exactly what resources I would need from the backend at each step, the interactions I had to expect from the user, and all the components I would have to build.
 
@@ -51,9 +52,9 @@ From there, thinking about the UI components was straightforward.
 
 ### **The UI components**
 
-![Home component design](https://cdn-images-1.medium.com/max/4076/1*K_weFb55yjDFrRBuhQ-9vQ.png)
-
-![Level component design](https://cdn-images-1.medium.com/max/4076/1*wKtKlirzwQw6ZugG8oNyvQ.png)
+<img src="https://cdn-images-1.medium.com/max/4076/1*K_weFb55yjDFrRBuhQ-9vQ.png" alt="Home component design" width="612"/>
+<br />
+<img src="https://cdn-images-1.medium.com/max/4076/1*wKtKlirzwQw6ZugG8oNyvQ.png" alt="Level component design" width="612"/>
 
 By thinking about all the components beforehand, I could visualize the relationships between them more easily (which components will be children of which, etc.). Coding a static version of the app, as I'll explain later, becomes easier.
 
@@ -61,7 +62,7 @@ As seen in the images above, I outlined the Home and the Level components as wel
 
 ### **The state of the application**
 
-![App state mock](https://cdn-images-1.medium.com/max/2696/1*Ar3i0X9FK4ig4H3sxDkUgw.png)
+<img src="https://cdn-images-1.medium.com/max/2696/1*Ar3i0X9FK4ig4H3sxDkUgw.png" alt="App state mock" width="612"/>
 
 Mocking the state and its shape helped me to think about all the information I would need, and how I would store it in Redux.
 
@@ -71,7 +72,7 @@ It also came in handy when I had to write all the interfaces and types, since I�
 
 ### UI components and Tailwind CSS
 
-![A component using Tailwind CSS utility classes](https://cdn-images-1.medium.com/max/3048/1*2NQQNjR74oePLdjP0yLt1Q.png)
+<img src="https://cdn-images-1.medium.com/max/3048/1*2NQQNjR74oePLdjP0yLt1Q.png" alt="A component using Tailwind CSS utility classes" width="612"/>
 
 Loosely following the steps described in [this handy section of the React documentation](https://beta.reactjs.org/learn/thinking-in-react), I started the implementation by developing a static version of the components, as outlined in my design. This means coding the UI with no state or interactivity, which is usually a lot of somewhat mindless typing — since we did all the thinking when designing it.
 
@@ -105,34 +106,36 @@ The createSlice function receives an object of reducer functions and automatical
 
 (Some code was removed from the code snippets below for brevity and readability. The full source code can be found in the [Github repo](https://github.com/e-motta/top-project-photo-tagging).)
 
-    // src/features/levels/slices/found-characters-slice.ts
-    export const foundCharactersSlice = createSlice({
-      name: 'foundCharacters',
-      initialState: foundCharactersInitialState,
-      // Here we add the reducer functions
-      reducers: {
-        resetScore() {
-          return foundCharactersInitialState;
-        },
-        setFoundCharacter(state, action: PayloadAction<string>) {
-          const id = action.payload;
-          const character = state.find((char: FoundCharacter) => char.id === id);
-          if (character) character.found = true;
-        },
-      },
-    });
+```Typescript
+// src/features/levels/slices/found-characters-slice.ts
+export const foundCharactersSlice = createSlice({
+  name: 'foundCharacters',
+  initialState: foundCharactersInitialState,
+  // Here we add the reducer functions
+  reducers: {
+    resetScore() {
+      return foundCharactersInitialState;
+    },
+    setFoundCharacter(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      const character = state.find((char: FoundCharacter) => char.id === id);
+      if (character) character.found = true;
+    },
+  },
+});
 
-    // RTK generates the action creators for us
-    export const { resetScore, setFoundCharacter } = foundCharactersSlice.actions;
+// RTK generates the action creators for us
+export const { resetScore, setFoundCharacter } = foundCharactersSlice.actions;
 
 
 
-    // src/features/levels/useGame.ts
+// src/features/levels/useGame.ts
 
-    //...
-    const dispatch = useAppDispatch();
-    // We call the action creator with the desired payload
-    dispatch(setFoundCharacter(charPosition.character_id));
+//...
+const dispatch = useAppDispatch();
+// We call the action creator with the desired payload
+dispatch(setFoundCharacter(charPosition.character_id));
+```
 
 Once the slice is registered in the Redux store, we can easily use the action creators to easily update the state from anywhere in the app. There are some caveats when updating the state of a component while a different component is rendering, which I will discuss in a future post.
 
@@ -142,56 +145,60 @@ The createApi function is the core of [RTK Query](https://redux-toolkit.js.org/r
 
 Normally, createApi is used by defining a baseUrl and then defining endpoints for specific queries and mutations:
 
-    // Define a service using a base URL and expected endpoints
-    export const pokemonApi = createApi({
-      reducerPath: 'pokemonApi',
-      baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
-      endpoints: (builder) => ({
-        getPokemonByName: builder.query<Pokemon, string>({
-          query: (name) => `pokemon/${name}`,
-        }),
-      }),
-    })
+```Typescript
+// Define a service using a base URL and expected endpoints
+export const pokemonApi = createApi({
+  reducerPath: 'pokemonApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+  endpoints: (builder) => ({
+    getPokemonByName: builder.query<Pokemon, string>({
+      query: (name) => `pokemon/${name}`,
+    }),
+  }),
+})
+```
 
 Firebase, though, works through its specific SDK, not through an API. If we still want to keep the benefits of fetching and mutating data using RTK Query (such as caching, useQuery/useMutation hooks, etc.), we need a slightly different approach.
 
-We need to use fakeBaseQuery() as the base query, and define the “endpoints” (which aren’t really endpoints) with queryFn, which needs to return an object with the shape _{ data: ResultType }_. Inside queryFn we can use the Firebase SDK to read or write any data we need from Firestore, then return it in the way expected by RTK Query.
+We need to use fakeBaseQuery() as the base query, and define the “endpoints” (which aren’t really endpoints) with queryFn, which needs to return an object with the shape `{ data: ResultType }`. Inside queryFn we can use the Firebase SDK to read or write any data we need from Firestore, then return it in the way expected by RTK Query.
 
 In the example below, we’re fetching a single document from Firestore, using its id. When the query is called, RTK Query will take the data and store it in state appropriately.
 
-    // src/features/levels/slices/levels-slice.ts
-    export const levelsApi = createApi({
-      reducerPath: 'levels',
-      baseQuery: fakeBaseQuery(),
-      tagTypes: ['Level', 'Character'],
-      endpoints: (builder) => ({
-        // We define the async information fetch using Firebase
-        fetchSingleLevel: builder.query<Level, string>({
-          async queryFn(id) {
-            try {
-              const ref = doc(firestore, 'levels', id);
-              const documentSnapshot = await getDoc(ref);
-              const data: Level = { ...documentSnapshot.data() } as Level;
-              return { data };
-            } catch (error: any) {
-              console.error(error.message);
-              return { error: error.message };
-            }
-          },
-          providesTags: ['Level'],
-        }),
-      }),
-    });
+```Typescript
+// src/features/levels/slices/levels-slice.ts
+export const levelsApi = createApi({
+  reducerPath: 'levels',
+  baseQuery: fakeBaseQuery(),
+  tagTypes: ['Level', 'Character'],
+  endpoints: (builder) => ({
+    // We define the async information fetch using Firebase
+    fetchSingleLevel: builder.query<Level, string>({
+      async queryFn(id) {
+        try {
+          const ref = doc(firestore, 'levels', id);
+          const documentSnapshot = await getDoc(ref);
+          const data: Level = { ...documentSnapshot.data() } as Level;
+          return { data };
+        } catch (error: any) {
+          console.error(error.message);
+          return { error: error.message };
+        }
+      },
+      providesTags: ['Level'],
+    }),
+  }),
+});
 
-    // RTK Query generates a hook we can use to fetch the data
-    export const { useFetchSingleLevelQuery } = levelsApi;
+// RTK Query generates a hook we can use to fetch the data
+export const { useFetchSingleLevelQuery } = levelsApi;
 
 
 
-    // src/features/levels/Level.tsx
-    // We use the hook to get the data, status indicators and a possible error
-    const { data, isLoading, isSuccess, isError, error } =
-        useFetchSingleLevelQuery(levelId);
+// src/features/levels/Level.tsx
+// We use the hook to get the data, status indicators and a possible error
+const { data, isLoading, isSuccess, isError, error } =
+    useFetchSingleLevelQuery(levelId);
+```
 
 By doing this, we ensure the data is being fetched from Firestore while still maintaining RTK Query state management advantages.
 
@@ -205,11 +212,11 @@ The finished app was deployed with Firebase Hosting and can be accessed here: [h
 
 Below are some screenshots of the Home, Level and High scores pages. As we can see, there were some changes compared to the initial design, but the overall idea remained the same.
 
-![Home](https://cdn-images-1.medium.com/max/5760/1*sPErtdo60wUWHYlKSA-UQg.png)
-
-![Level](https://cdn-images-1.medium.com/max/5760/1*Vwz-wJ2zczMQgFPJ2wst2Q.png)
-
-![High scores](https://cdn-images-1.medium.com/max/5760/1*lEDYRcetU0zACuCNWn110Q.png)
+<img src="https://cdn-images-1.medium.com/max/5760/1*sPErtdo60wUWHYlKSA-UQg.png" alt="Home" width="612"/>
+<br />
+<img src="https://cdn-images-1.medium.com/max/5760/1*Vwz-wJ2zczMQgFPJ2wst2Q.png" alt="Level" width="612"/>
+<br />
+<img src="https://cdn-images-1.medium.com/max/5760/1*lEDYRcetU0zACuCNWn110Q.png" alt="High scores" width="612"/>
 
 ## Closing remarks
 

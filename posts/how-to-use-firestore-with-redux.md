@@ -3,7 +3,8 @@ title: "How to use Firestore with Redux in a React application"
 date: "2023-01-09"
 ---
 
-![Photo by [Lautaro Andreani](https://unsplash.com/@lautaroandreani?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://cdn-images-1.medium.com/max/9012/0*WNb40yO0ma4mKbC3)
+<img src="https://cdn-images-1.medium.com/max/9012/0*WNb40yO0ma4mKbC3" width="612"/>
+<small>Photo by <a href='https://unsplash.com/@lautaroandreani?utm_source=medium&utm_medium=referral'>Lautaro Andreani</a> on Unsplash</small>
 
 You’re using **Firebase** as your backend-as-a-service platform, with **Firestore** holding your data. You’re building the frontend with **React** and you want to use **Redux** to manage the app’s state.
 
@@ -37,16 +38,18 @@ The **createApi** function is the core of [RTK Query](https://redux-toolkit.js.o
 
 Normally, createApi is used by defining a baseUrl and then defining endpoints for specific queries and mutations:
 
-    // Define a service using a base URL and expected endpoints
-    export const pokemonApi = createApi({
-      reducerPath: 'pokemonApi',
-      baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
-      endpoints: (builder) => ({
-        getPokemonByName: builder.query<Pokemon, string>({
-          query: (name) => `pokemon/${name}`,
-        }),
-      }),
-    })
+```Typescript
+// Define a service using a base URL and expected endpoints
+export const pokemonApi = createApi({
+  reducerPath: 'pokemonApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+  endpoints: (builder) => ({
+    getPokemonByName: builder.query<Pokemon, string>({
+      query: (name) => `pokemon/${name}`,
+    }),
+  }),
+})
+```
 
 Firebase, though, works through its SDK, not through an API. If we still want to keep the benefits of fetching and mutating data using RTK Query (more on this below), we need a slightly different approach, as we’ll see.
 
@@ -151,9 +154,9 @@ This is a function that takes a _builder_ as argument and returns an object with
 
 Normally the endpoints would look like in the Pokémon example above (under the “Using RTK Query to fetch data” section).
 
-To fetch data from Firestore, though, considering we’re not actually querying it from an API, we need to use the **_queryFn_** function. This allows us to define any arbitrary logic inside it, as long as we return the data in the shape expected by RTK Query (i.e. _{ data: ResultType }_).
+To fetch data from Firestore, though, considering we’re not actually querying it from an API, we need to use the **_queryFn_** function. This allows us to define any arbitrary logic inside it, as long as we return the data in the shape expected by RTK Query (i.e. `{ data: ResultType }`).
 
-In the example above, we’re importing and using the Firebase SDK functions to query and update Firestore, just like we would if not using RTK Query. After querying the data, we return _{ data: scoresTables }_; when updating the database, no data needs to be returned, but RTK Query still expects the same shape of return, so we simply return _{ data: null }_.
+In the example above, we’re importing and using the Firebase SDK functions to query and update Firestore, just like we would if not using RTK Query. After querying the data, we return `{ data: scoresTables }`; when updating the database, no data needs to be returned, but RTK Query still expects the same shape of return, so we simply return `{ data: null }`.
 
 ### React hooks
 
@@ -165,38 +168,42 @@ In the example above, it generated the **_useFetchHighScoresTablesQuery_** and *
 
 The _use…Query_ hook will return an object with the data and the query properties.
 
-    // src/features/scores/HighScores.tsx
-    import { useFetchHighScoresTablesQuery } from './scoresSlice';
+```Typescript
+// src/features/scores/HighScores.tsx
+import { useFetchHighScoresTablesQuery } from './scoresSlice';
 
-    const HighScores = () => {
-      const {
-        data,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-      } = useFetchHighScoresTablesQuery();
+const HighScores = () => {
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useFetchHighScoresTablesQuery();
 
-    return (
-      ...
-    )
-    }
+return (
+  ...
+)
+}
+```
 
 The _use…Mutation_ hook will return a tuple with a mutation trigger and the mutation result. The mutation trigger is called to fire off the mutation request. The mutation result is an object with the mutation properties.
 
-    // src/features/scores/components/EnterName.tsx
-    import { useSetNewHighScoreMutation } from '../scoresSlice';
+```Typescript
+// src/features/scores/components/EnterName.tsx
+import { useSetNewHighScoreMutation } from '../scoresSlice';
 
-    const EnterName = () => {
-      const [setNewHighScore, result] = useSetNewHighScoreMutation();
+const EnterName = () => {
+  const [setNewHighScore, result] = useSetNewHighScoreMutation();
 
-      // assume we set the variable 'id' with the table id
-      // and the variable 'newHighScore' with a valid high score
+  // assume we set the variable 'id' with the table id
+  // and the variable 'newHighScore' with a valid high score
 
-      return (
-        <button onClick={() => setNewHighScore(id, newHighScore)}></button>
-      )
-    }
+  return (
+    <button onClick={() => setNewHighScore(id, newHighScore)}></button>
+  )
+}
+```
 
 And this is it! You’re all set to use Firestore while keeping the benefits of Redux and RTK Query.
 
