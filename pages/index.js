@@ -13,9 +13,10 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.homeIntro}>
         <p>
-          Hi, I&apos;m a Senior Software Engineer and Tech Lead. I design and
-          lead backend architectures built with Python, FastAPI, PySpark, Kafka,
-          PostgreSQL, Docker, and Kubernetes.
+          Hi, I&apos;m a <strong>Senior Software Engineer</strong> and{" "}
+          <strong>Tech Lead</strong> with 4+ years of experience in software
+          development. I design and lead backend architectures built with
+          Python, FastAPI, PySpark, Kafka, PostgreSQL, Docker, and Kubernetes.
         </p>
         <p>
           I drive system design, technical discovery, cross-team architecture
