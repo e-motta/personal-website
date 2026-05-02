@@ -54,3 +54,37 @@
 .pCentered {
   text-align: center;
 }
+
+/* Homepage intro: left-aligned body copy reads faster than centered blocks */
+.homeIntro {
+  text-align: left;
+  max-width: 38rem;
+  margin: 0 auto 2rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #1f2937;
+}
+
+.homeIntro p {
+  margin: 0 0 1.125rem;
+}
+
+.homeIntro p:last-of-type {
+  margin-bottom: 0;
+}
+
+.homeIntro ul {
+  margin: 0.75rem 0 1.125rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.homeIntro li {
+  margin: 0.35rem 0;
+  padding-left: 0.25rem;
+}
+
+.homeIntro a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

@@ -11,16 +11,33 @@ export default function Home({ allPostsData }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p className={utilStyles.pCentered}>
-          Hi, I'm Eduardo! I'm a fullstack developer.{" "}
+      <section className={utilStyles.homeIntro}>
+        <p>
+          Hi, I&apos;m a Senior Software Engineer and Tech Lead. I design and
+          lead backend architectures built with Python, FastAPI, PySpark, Kafka,
+          PostgreSQL, Docker, and Kubernetes.
         </p>
-        <p className={utilStyles.pCentered}>
-          Check out my <a href="https://github.com/e-motta">Github</a> and my{" "}
+        <p>
+          I drive system design, technical discovery, cross-team architecture
+          decisions, roadmap planning, and mentoring.
+        </p>
+        <p>
+          Being a former tax lawyer and law firm partner, I am strong at
+          translating complex regulatory rules into robust technical systems.
+        </p>
+        <p>
+          Check out my <a href="https://github.com/e-motta">GitHub</a> and my{" "}
           <a href="https://www.linkedin.com/in/eduardomottademoraes/">
-            Linkedin
+            LinkedIn
           </a>
           .
+        </p>
+        <p>
+          In my free time, I enjoy{" "}
+          <a href="https://www.goodreads.com/user/show/27336946-eduardo-motta-de-moraes">
+            reading
+          </a>{" "}
+          and <a href="https://www.strava.com/athletes/47176614">running</a>.
         </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
