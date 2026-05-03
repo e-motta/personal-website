@@ -1,0 +1,39 @@
+---
+description: Use Conventional Commits for all git commits
+alwaysApply: true
+---
+
+# Conventional Commits
+
+Every commit message must follow [Conventional Commits](https://www.conventionalcommits.org/).
+
+## Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+- **type** (required): `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`, etc.
+- **scope** (optional): area in parentheses, e.g. `feat(blog): add RSS link`
+- **description** (required): imperative mood, lowercase, no period at the end, ~50 chars or less when practical
+- Use **BREAKING CHANGE:** in the footer or `!` after type/scope for breaking changes
+
+## Examples
+
+```
+feat: add dark mode toggle
+fix(posts): correct frontmatter date parsing
+docs: update README install steps
+chore: bump next to 14.2
+```
+
+## Do not use
+
+- Vague messages: `update`, `fixes`, `wip`, `misc`
+- Non-conventional prefixes that are not the standard type list unless the project explicitly adopts them
+
+When proposing or running `git commit`, write the full message in this form.
