@@ -11,12 +11,11 @@ It's not. Processing millions of records per hour with Python is very
 doable today. Between distributed compute frameworks, cheap object storage,
 and container orchestration, the tooling is already there. What matters is how you structure the system around the computation.
 
+If the API tries to compute everything, the system becomes fragile. If the batch layer owns user-facing state, the product becomes hard to reason about. If the database stores every analytical artifact, it becomes a bottleneck. If object storage has no contract, every service quietly depends on undocumented paths.
+
 In this post, I'll walk through how a real-world architecture like this is
 implemented in the project I lead, using Python (FastAPI), PySpark,
 Kafka, and Kubernetes.
-
-In a future post, I’ll cover where this kind of system starts to break, and
-why performance is usually not the problem.
 
 ## The architecture
 
@@ -79,7 +78,7 @@ A critical separation in this architecture:
 So the API layer is strictly I/O bound. Heavy computation happens in
 distributed Spark jobs that can be easily replicated horizontally.
 
-That's what allows the system to scale.
+That's what allows the system to scale when processing large volumes of data.
 
 ## Message-driven execution
 
@@ -90,24 +89,24 @@ All compute is triggered through a simple message contract, which keeps the laun
 
 ## Data model: object storage as the source of truth
 
-Instead of storing large analytical datasets in a database, everything is persisted in object storage (S3-compatible).
+Large analytical data does not belong in the relational database.
 
-Data is organized using a deterministic contract:
+PostgreSQL is excellent for process metadata, statuses, users, permissions, and audit records. It is not where you want to store millions of transformed rows, large Parquet datasets, generated CSV archives, and historical snapshots.
+
+For analytical artifacts, the system uses S3-compatible object storage with a deterministic layout:
 
 `{entity_id}/{data_version}/...`
 
 Each version represents an immutable snapshot of processed data.
 
-This gives us:
+This gives us four important properties:
 
 - Immutability (each version is a snapshot)
 - Reproducibility (you can rerun computations on the same snapshot)
 - Isolation (new runs don't overwrite old data)
 - Scalability (no database overload with large payloads)
 
-But it also introduces an important constraint:
-
-- The storage layout is a shared contract across all services.
+The trade-off is that storage paths become a shared API. If multiple services depend on the same layout, that layout must be documented, tested, and treated as a contract.
 
 ## Why this architecture works
 
@@ -120,3 +119,5 @@ This setup works well because:
 - services are loosely coupled via storage + messaging
 
 Having that in place, we don't need to fight the system as it grows, we can just let it expand along the lines it was designed for.
+
+In a future post, I will cover where this architecture starts to break, and why performance is usually not the first problem.
