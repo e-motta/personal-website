@@ -15,12 +15,13 @@ export default function Home({ allPostsData }) {
         <p>
           Hi, I&apos;m a <strong>Senior Software Engineer</strong> and{" "}
           <strong>Tech Lead</strong> with 4+ years of experience in software
-          development. I design and lead backend architectures built with
-          Python, FastAPI, PySpark, Kafka, PostgreSQL, Docker, and Kubernetes.
+          development.
         </p>
         <p>
-          I drive system design, technical discovery, cross-team architecture
-          decisions, roadmap planning, and mentoring.
+          I design and lead backend architectures built with Python, FastAPI,
+          PySpark, Kafka, PostgreSQL, Docker, and Kubernetes. I drive system
+          design, technical discovery, cross-team architecture decisions,
+          roadmap planning, and mentoring.
         </p>
         <p>
           Being a former tax lawyer and law firm partner, I am strong at
