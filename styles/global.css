@@ -1,3 +1,15 @@
+:root {
+  color-scheme: dark;
+  --color-bg: #0d1117;
+  --color-text: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-link: #58a6ff;
+  --color-link-hover: #79c0ff;
+  --color-code-bg: #21262d;
+  --color-code-text: #e6edf3;
+  --color-pre-bg: #161b22;
+}
+
 html,
 body {
   padding: 0;
@@ -6,6 +18,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 * {
@@ -13,11 +27,12 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: var(--color-link);
   text-decoration: none;
 }
 
 a:hover {
+  color: var(--color-link-hover);
   text-decoration: underline;
 }
 
@@ -27,13 +42,13 @@ img {
 }
 
 pre {
-  background-color: rgb(42, 42, 42);
+  background-color: var(--color-pre-bg);
   border-radius: 10px;
 }
 
 pre code {
   font-size: 0.9rem;
-  color: white;
+  color: var(--color-code-text);
   display: block;
   background: none;
   white-space: pre;
@@ -45,7 +60,8 @@ pre code {
 }
 
 code {
-  background-color: rgb(223, 223, 223);
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
   border-radius: 4px;
   padding: 2px 1px 2px 1px;
   font-family: monospace;
@@ -54,5 +70,5 @@ code {
 small,
 small > * {
   margin: auto;
-  color: grey;
+  color: var(--color-text-muted);
 }
