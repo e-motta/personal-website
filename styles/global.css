@@ -1,15 +1,16 @@
 :root {
   color-scheme: dark;
   --color-bg: #0d1117;
-  --color-text: #e6edf3;
+  --color-text: #c9d1d9;
   --color-text-muted: #8b949e;
-  --color-text-soft: #c9d1d9;
   --color-label: #6e7681;
   --color-link: #58a6ff;
   --color-link-hover: #79c0ff;
   --color-code-bg: #21262d;
-  --color-code-text: #e6edf3;
+  --color-code-text: var(--color-text);
   --color-pre-bg: #161b22;
+  --color-border: #30363d;
+  --section-gap: 1.7rem;
 }
 
 html,
@@ -35,7 +36,6 @@ a {
 
 a:hover {
   color: var(--color-link-hover);
-  text-decoration: underline;
 }
 
 img {

@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Link from "next/link";
-import FormattedDate from "../components/FormattedDate";
+import BlogList from "../components/BlogList";
 import IntroIcon from "../components/IntroIcon";
 import Layout, { siteTitle } from "../components/Layout";
 import { getSortedPostsData } from "../lib/posts";
@@ -82,19 +81,11 @@ export default function Home({ allPostsData }) {
           </div>
         ))}
       </dl>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <FormattedDate dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
+      <section className={utilStyles.blogSection} aria-labelledby="blog-heading">
+        <h2 id="blog-heading" className={utilStyles.blogHeading}>
+          Blog
+        </h2>
+        <BlogList posts={allPostsData} />
       </section>
     </Layout>
   );
