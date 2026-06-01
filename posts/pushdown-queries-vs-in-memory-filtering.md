@@ -27,23 +27,7 @@ Finally, the **scenario shape** dictates the workload. A plain first page withou
 
 The table below shows the mean latency and mean peak memory per scenario.
 
-| Scenario                   | In-memory latency (ms) | In-memory peak memory (MB) | Pushdown latency (ms) | Pushdown peak memory (MB) |
-| :------------------------- | :--------------------- | :------------------------- | :-------------------- | :------------------------ |
-| Full load (all rows)       | 1,025                  | 119                        | 4,752                 | 470                       |
-| Page, no sort              | 1,019                  | 119                        | 199                   | 0.7                       |
-| Page with sort             | 1,279                  | 180                        | 198                   | 0.7                       |
-| Filter: range + page       | 1,131                  | 237                        | 222                   | 0.7                       |
-| Filter: enum + page        | 1,083                  | 141                        | 186                   | 0.7                       |
-| Filter: text + page        | 1,413                  | 178                        | 176                   | 0.7                       |
-| All filters + page         | 1,301                  | 237                        | 222                   | 0.7                       |
-| Narrow range + page        | 1,139                  | 237                        | 195                   | 0.7                       |
-| Narrow range + sort + page | 1,647                  | 237                        | 200                   | 0.7                       |
-| Wide range + page          | 1,132                  | 231                        | 178                   | 0.7                       |
-| Wide range + sort + page   | 1,494                  | 231                        | 217                   | 0.7                       |
-| Enum filter + sort + page  | 1,194                  | 141                        | 208                   | 0.7                       |
-| All filters + sort + page  | 1,389                  | 237                        | 228                   | 0.7                       |
-| Enum filter, deep page     | 1,110                  | 141                        | 171                   | 0.7                       |
-| Enum + sort + deep page    | 1,235                  | 141                        | 228                   | 0.7                       |
+<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmExZDZhZTUzOTg4ODE5MTgyZmU1M2JhMmMxZDVlMzI6ZmlsZV8wMDAwMDAwMDExZTg3MjBlODhhNWE5MjNlNjdmODk5MyIsInRzIjoiMjA2MDUiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImIzZmEwZWE5NmQ3NDIyOWRhYmEwMTQzZDk4OTdkNDNmYmJlNDlmYjE2ODI0NTAxNWY5Njg0MmY0MzU2OWQwOWYiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" width="612"/>
 
 Performance remained consistent across typical API workloads, including pagination, filtering, sorting, and deep paging. Pushdown queries completed in approximately 170–230 ms, whereas the existing in-memory filtering implementation ranged from 1.0 to 1.6 seconds. Memory efficiency improved even more dramatically: peak memory usage stayed near 0.7 MB for pushdown execution, compared to 119–237 MB for in-memory processing. Across 15 production-like query shapes, this translated to roughly 5x lower latency and 160x lower memory consumption.
 
