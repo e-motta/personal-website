@@ -1,0 +1,17 @@
+name: Dispatch README update
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'posts/**'
+      - 'public/images/posts/**'
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.E_MOTTA_DISPATCH_TOKEN }}
+          repository: e-motta/e-motta
+          event-type: posts-updated
