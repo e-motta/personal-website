@@ -27,7 +27,25 @@ Finally, the **scenario shape** dictates the workload. A plain first page withou
 
 The table below shows the mean latency and mean peak memory per scenario.
 
-<img src="/images/posts/pushdown-queries-vs-in-memory-filtering/02.jpeg" width="612"/>
+| Scenario | In-memory | Pushdown |
+| :-- | --: | --: |
+| Full load (all rows) | 1,025 ms<br />119 MB | 4,752 ms<br />470 MB |
+| Page, no sort | 1,019 ms<br />119 MB | 199 ms<br />0.7 MB |
+| Page with sort | 1,279 ms<br />180 MB | 198 ms<br />0.7 MB |
+| Filter: range + page | 1,131 ms<br />237 MB | 222 ms<br />0.7 MB |
+| Filter: enum + page | 1,083 ms<br />141 MB | 186 ms<br />0.7 MB |
+| Filter: text + page | 1,413 ms<br />178 MB | 176 ms<br />0.7 MB |
+| All filters + page | 1,301 ms<br />237 MB | 222 ms<br />0.7 MB |
+| Narrow range + page | 1,139 ms<br />237 MB | 195 ms<br />0.7 MB |
+| Narrow range + sort + page | 1,647 ms<br />237 MB | 200 ms<br />0.7 MB |
+| Wide range + page | 1,132 ms<br />231 MB | 178 ms<br />0.7 MB |
+| Wide range + sort + page | 1,494 ms<br />231 MB | 217 ms<br />0.7 MB |
+| Enum filter + sort + page | 1,194 ms<br />141 MB | 208 ms<br />0.7 MB |
+| All filters + sort + page | 1,389 ms<br />237 MB | 228 ms<br />0.7 MB |
+| Enum filter, deep page | 1,110 ms<br />141 MB | 171 ms<br />0.7 MB |
+| Enum + sort + deep page | 1,235 ms<br />141 MB | 228 ms<br />0.7 MB |
+
+<small>Each cell shows mean latency, then peak memory on the line below.</small>
 
 Performance remained consistent across typical API workloads, including pagination, filtering, sorting, and deep paging. Pushdown queries completed in approximately 170–230 ms, whereas the existing in-memory filtering implementation ranged from 1.0 to 1.6 seconds. Memory efficiency improved even more dramatically: peak memory usage stayed near 0.7 MB for pushdown execution, compared to 119–237 MB for in-memory processing. Across 15 production-like query shapes, this translated to roughly 5x lower latency and 160x lower memory consumption.
 
