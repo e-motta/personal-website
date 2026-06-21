@@ -3,7 +3,7 @@ title: "Maximize Your React Skills: Build a To-Do List App from Start to Finish 
 date: "2023-01-25"
 ---
 
-<img src="https://cdn-images-1.medium.com/max/3200/1*poaGV4iICp06Q-yTlA2g_g.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/01.png" width="612" />
 
 In this blog post we’re going to go through everything you need to **understand** and **build** a basic React application. Whether you’re a beginner just getting started with React or a seasoned developer looking to brush up on your skills, this guide is for you.
 
@@ -238,7 +238,7 @@ After a few seconds, we will see something similar to this:
 
 If we open our browser and navigate to [http://localhost:5173](http://localhost:5173)/ we’ll see the default Vite + React page:
 
-<img src="https://cdn-images-1.medium.com/max/6096/1*udli9F7OjbcyHFbJZ73CjQ.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/02.png" width="612" />
 
 This means that everything is as it should be and we can start working on our app.
 
@@ -248,7 +248,7 @@ This means that everything is as it should be and we can start working on our ap
 
 If we open the project in our code editor or IDE of choice, we should see a file structure like this:
 
-<img src="https://cdn-images-1.medium.com/max/2000/1*F8o_D_b9s1kkn1dWAb0quQ.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/03.png" width="612" />
 
 We can delete some of the boilerplate files, since we won’t be using them (all .svg and .css files).
 
@@ -286,7 +286,7 @@ Ideally, our components should be responsible for only one thing, following the 
 
 In the image below, the names in purple are the components we’re going to be building — everything else are native HTML elements. If they’re inside each other, it means there’s likely going to be a parent-child relationship.
 
-<img src="https://cdn-images-1.medium.com/max/2372/1*50d84uxgKDwZWU9OtdFaDA.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/04.png" width="612" />
 
 ### **Props: building a static version**
 
@@ -542,7 +542,7 @@ The state to track the tasks, however, has to be handled differently, as it need
 
 Let’s take a look at our component tree (you can use the [React dev tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) for this).
 
-<img src="https://cdn-images-1.medium.com/max/2000/1*MJf1OO0v2Fy5YwO6xf659A.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/05.png" width="612" />
 
 We can see that the first common parent component is App. So this is where our state for the tasks is going to live.
 
@@ -679,7 +679,7 @@ This is where the id comes in handy, as we need to pass a unique key every time 
 
 The result for now is this:
 
-<img src="https://cdn-images-1.medium.com/max/2592/1*IFHUG-wXtEuajtJLJ0Yi7w.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/06.png" width="612" />
 
 We can already see the summary numbers and the task names reflecting our dummy data. But we still lack a way to add or delete tasks.
 
@@ -889,7 +889,7 @@ export default TaskItem;
 
 And here’s our final app after we add a few tasks!
 
-<img src="https://cdn-images-1.medium.com/max/2580/1*o2qabgF-IoBnrwXM0edZpA.png" width="612" />
+<img src="/images/posts/maximize-your-react-skills-build-a-to-do-list-app/07.png" width="612" />
 
 If you’re coding along, you can deploy your own app by following [these instructions](https://vitejs.dev/guide/static-deploy.html).
 

@@ -3,7 +3,7 @@ title: "Building Predictable Software with AI Agents"
 date: "2026-06-20"
 ---
 
-<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmEzNWE4M2VlZjcwODE5MTk0YTFmNzc5NDRmYzczNDY6ZmlsZV8wMDAwMDAwMDVlMjg3MjBlOWNkNWU3MjI3MzQ1YjA2ZCIsInRzIjoiMjA2MjMiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6Ijg2ZWUxZjg1NTM3ZGQwYzliNzZmMTExYzMwZDhjMWU2OGRmMjQxY2E2ZjA2MmIyYzljZGNhMTFlYTA3MTFmMmQiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" width="612"/>
+<img src="/images/posts/building-predictable-software-with-ai-agents/01.png" width="612"/>
 
 AI coding agents have made it possible to scaffold applications, explore unfamiliar codebases, and ship features faster than ever. But speed without structure creates a different kind of debt: each session reinvents the architecture, conventions drift, and business rules end up scattered across routes and templates.
 
@@ -46,7 +46,7 @@ Specs tell the agent what to build. Tests and services ensure production behavio
 
 ## A Practical Example: Cumbuca Open Finance
 
-<img src="https://cdn-images-1.medium.com/v2/resize:fit:1600/1*jIWPeot1cdE2piZsaujGgA.png" width="612"/>
+<img src="/images/posts/building-predictable-software-with-ai-agents/02.png" width="612"/>
 
 I recently came across [Cumbuca's Model Context Protocol (MCP) server](https://mcp.cumbuca.com/mcp), which exposes the [Brazilian Open Finance environment](https://www.bcb.gov.br/en/financialstability/open_finance) through a standard tool interface. I wasn't going to put an LLM in my app to talk to my bank, but I figured I could still use the MCP as a programmatic data source, replacing CSV downloads and manual entry with a one-click sync. That made it a **sizeable feature**: OAuth, an external protocol, four import paths, and mapping into existing finance and portfolio models. Too big for a one-liner prompt.
 

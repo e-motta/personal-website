@@ -3,7 +3,7 @@ title: "Object Storage as a data contract between services"
 date: "2026-05-23"
 ---
 
-<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmExMjMzYjk0YTg0ODE5MTlkMDUzN2I1YTQzMmQ0MmM6ZmlsZV8wMDAwMDAwMGZkZGM3MjBlYTVmODFmMGY5OGQ4OGNkZSIsInRzIjoiMjA1OTYiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6IjkwOTcxMzViMzhjYzM3YTJhZWI2NjZiYjRkOWFhNzFkOGIxMmRhYzJhMmVmOTRmNjQzNGUwZWQ3ODIxOTExYjUiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" alt="Object Storage as a data contract between services" width="612"/>
+<img src="/images/posts/object-storage-as-a-contract/01.png" alt="Object Storage as a data contract between services" width="612"/>
 
 Object storage is often introduced simply as a cheap place to put files. But in many data systems, it quietly becomes something much more important: the actual contract between your services.
 

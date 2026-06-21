@@ -3,7 +3,7 @@ title: "Scaling data systems: Where things start to break"
 date: "2026-05-10"
 ---
 
-<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmEwMGIzZTNiMDgwODE5MWI2ZTQwNWY4ZjQyOWU2ZjM6ZmlsZV8wMDAwMDAwMGQzM2M3MWZiODg4ZWI1YTc3ZDE4ZjdkMSIsInRzIjoiMjA1ODMiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImUxMGVkMzJhZDk0ZTM4NWZiYmVhN2NhMjkzMTc2YmI1M2UzMzk0ZmI4NzViMzY3MjkzMzMyMGRkMWQ0MzUzNGEiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" alt="Where scalable systems break" width="612"/>
+<img src="/images/posts/scaling-data-systems-2/01.png" alt="Where scalable systems break" width="612"/>
 
 In a previous post, I described an architecture that processes millions of
 records per hour using Python, Kafka, PySpark, and Kubernetes.

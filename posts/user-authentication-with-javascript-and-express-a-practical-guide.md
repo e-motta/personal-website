@@ -3,7 +3,7 @@ title: "User Authentication with JavaScript and Express: A Practical Guide"
 date: "2023-07-18"
 ---
 
-<img src="https://miro.medium.com/v2/resize:fit:1400/0*eUXv1_yEOoEiyR9S" width="612"/>
+<img src="/images/posts/user-authentication-with-javascript-and-express-a-practical-guide/01.jpeg" width="612"/>
 <small>Photo by <a href='https://unsplash.com/@flyd2069?utm_source=medium&utm_medium=referral'>FLY:D</a></small>
 
 Authentication is a critical aspect of building secure web applications that require user identification and access control. It ensures that users can securely access their accounts and protect sensitive information.

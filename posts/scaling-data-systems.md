@@ -3,7 +3,7 @@ title: "Scaling data systems: How we process millions of records with Python"
 date: "2026-05-02"
 ---
 
-<img src="https://cdn-images-1.medium.com/max/1600/1*zw9J638KsWndz5zrU1z1rQ.png" alt="Scaling data systems" width="612"/>
+<img src="/images/posts/scaling-data-systems/01.png" alt="Scaling data systems" width="612"/>
 
 Most people assume scaling data systems is just about performance.
 
@@ -55,7 +55,7 @@ Under the hood, though, it's closer to this:
 
 We can visualize it in this simplified diagram:
 
-<img src="https://cdn-images-1.medium.com/max/1600/1*P3el00AInb0nsdjFhjXrDg.png" alt="Simplified flowchart" width="612"/>
+<img src="/images/posts/scaling-data-systems/02.png" alt="Simplified flowchart" width="612"/>
 
 ## What makes it easy to scale
 

@@ -39,7 +39,7 @@ One thing I learned the hard way is that it’s always better to think (a lot) b
 
 ### The information flow as the user interacts with the app
 
-<img src="https://cdn-images-1.medium.com/max/5308/1*WqgZGoTckmnbM9BgSLunpw.png" alt="Information flowchart" width="612"/>
+<img src="/images/posts/building-a-react-application/01.png" alt="Information flowchart" width="612"/>
 <small>Information flowchart</small>
 
 While React is declarative (meaning we code by describing the final state of the UI, not step-by-step instructions), I found that by thinking about the flow of information I could more easily figure out exactly what resources I would need from the backend at each step, the interactions I had to expect from the user, and all the components I would have to build.
@@ -52,9 +52,9 @@ From there, thinking about the UI components was straightforward.
 
 ### **The UI components**
 
-<img src="https://cdn-images-1.medium.com/max/4076/1*K_weFb55yjDFrRBuhQ-9vQ.png" alt="Home component design" width="612"/>
+<img src="/images/posts/building-a-react-application/02.png" alt="Home component design" width="612"/>
 <br />
-<img src="https://cdn-images-1.medium.com/max/4076/1*wKtKlirzwQw6ZugG8oNyvQ.png" alt="Level component design" width="612"/>
+<img src="/images/posts/building-a-react-application/03.png" alt="Level component design" width="612"/>
 
 By thinking about all the components beforehand, I could visualize the relationships between them more easily (which components will be children of which, etc.). Coding a static version of the app, as I'll explain later, becomes easier.
 
@@ -62,7 +62,7 @@ As seen in the images above, I outlined the Home and the Level components as wel
 
 ### **The state of the application**
 
-<img src="https://cdn-images-1.medium.com/max/2696/1*Ar3i0X9FK4ig4H3sxDkUgw.png" alt="App state mock" width="612"/>
+<img src="/images/posts/building-a-react-application/04.png" alt="App state mock" width="612"/>
 
 Mocking the state and its shape helped me to think about all the information I would need, and how I would store it in Redux.
 
@@ -72,7 +72,7 @@ It also came in handy when I had to write all the interfaces and types, since I�
 
 ### UI components and Tailwind CSS
 
-<img src="https://cdn-images-1.medium.com/max/3048/1*2NQQNjR74oePLdjP0yLt1Q.png" alt="A component using Tailwind CSS utility classes" width="612"/>
+<img src="/images/posts/building-a-react-application/05.png" alt="A component using Tailwind CSS utility classes" width="612"/>
 
 Loosely following the steps described in [this handy section of the React documentation](https://beta.reactjs.org/learn/thinking-in-react), I started the implementation by developing a static version of the components, as outlined in my design. This means coding the UI with no state or interactivity, which is usually a lot of somewhat mindless typing — since we did all the thinking when designing it.
 
@@ -212,11 +212,11 @@ The finished app was deployed with Firebase Hosting and can be accessed here: [h
 
 Below are some screenshots of the Home, Level and High scores pages. As we can see, there were some changes compared to the initial design, but the overall idea remained the same.
 
-<img src="https://cdn-images-1.medium.com/max/5760/1*sPErtdo60wUWHYlKSA-UQg.png" alt="Home" width="612"/>
+<img src="/images/posts/building-a-react-application/06.png" alt="Home" width="612"/>
 <br />
-<img src="https://cdn-images-1.medium.com/max/5760/1*Vwz-wJ2zczMQgFPJ2wst2Q.png" alt="Level" width="612"/>
+<img src="/images/posts/building-a-react-application/07.png" alt="Level" width="612"/>
 <br />
-<img src="https://cdn-images-1.medium.com/max/5760/1*lEDYRcetU0zACuCNWn110Q.png" alt="High scores" width="612"/>
+<img src="/images/posts/building-a-react-application/08.png" alt="High scores" width="612"/>
 
 ## Closing remarks
 

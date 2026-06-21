@@ -3,7 +3,7 @@ title: "Why determinism still matters in the age of AI"
 date: "2026-05-17"
 ---
 
-<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmEwOWY2ZDE3M2YwODE5MTgzMGQ3MGIxN2JiOGZhZDA6ZmlsZV8wMDAwMDAwMDBmYjA3MWY3YjNkZGM4MDVlMWU0MzU5MyIsInRzIjoiMjA1OTAiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6Ijg2OWFiMzExNzBkOTcyYjhiNmMzNGIxYzhjMDkwNzk0NmYwMzgzOGY3ZjIzMDYwM2FlOTMwMGUzZDNiMTI0OWMiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" alt="Determinism still matters" width="612"/>
+<img src="/images/posts/determinism-still-matters/01.png" alt="Determinism still matters" width="612"/>
 
 AI has completely changed what software teams can automate. Today, it can classify text, summarize documents, assist support teams, generate code, answer questions, and help users navigate complex workflows.
 

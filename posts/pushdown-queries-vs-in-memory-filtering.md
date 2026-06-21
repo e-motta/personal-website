@@ -3,7 +3,7 @@ title: "5x Faster, 160x Leaner: Benchmarking Pushdown Queries vs In-Memory Filte
 date: "2026-06-01"
 ---
 
-<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmExZDY5ODEzMDZjODE5MThmNDhjZGYyYzdhNWVmMDY6ZmlsZV8wMDAwMDAwMDE5NjA3MjBlYWNlYTVkMTVlYTMzZTdlMCIsInRzIjoiMjA2MDUiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImE4OWJiZTg1Y2I4MzhkMjBlOTVjOWEyZWExMzQ3ZjhiMThlOWRhZTQzZDU0NWI2ODAzMTAwMGM3OTE1ZDE4MmUiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" width="612"/>
+<img src="/images/posts/pushdown-queries-vs-in-memory-filtering/01.png" width="612"/>
 
 When I was recently tasked with scaling an existing read-heavy service, the architecture I encountered was straightforward: it stored Parquet files in a fast in-memory cache, loaded the entire file into the application on each request, and used standard dataframe tooling to filter, sort, and paginate. Working with smaller datasets, this approach made complete sense. The code was simple, latency was predictable, and operational complexity remained low.
 
@@ -27,7 +27,7 @@ Finally, the **scenario shape** dictates the workload. A plain first page withou
 
 The table below shows the mean latency and mean peak memory per scenario.
 
-<img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6Im1fNmExZDZhZTUzOTg4ODE5MTgyZmU1M2JhMmMxZDVlMzI6ZmlsZV8wMDAwMDAwMDExZTg3MjBlODhhNWE5MjNlNjdmODk5MyIsInRzIjoiMjA2MDUiLCJwIjoicHlpIiwiY2lkIjoiMSIsInNpZyI6ImIzZmEwZWE5NmQ3NDIyOWRhYmEwMTQzZDk4OTdkNDNmYmJlNDlmYjE2ODI0NTAxNWY5Njg0MmY0MzU2OWQwOWYiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsLCJjcyI6bnVsbCwiY2RuIjpudWxsLCJmbiI6bnVsbCwiY2QiOm51bGwsImNwIjpudWxsLCJtYSI6bnVsbH0=" width="612"/>
+<img src="/images/posts/pushdown-queries-vs-in-memory-filtering/02.jpeg" width="612"/>
 
 Performance remained consistent across typical API workloads, including pagination, filtering, sorting, and deep paging. Pushdown queries completed in approximately 170–230 ms, whereas the existing in-memory filtering implementation ranged from 1.0 to 1.6 seconds. Memory efficiency improved even more dramatically: peak memory usage stayed near 0.7 MB for pushdown execution, compared to 119–237 MB for in-memory processing. Across 15 production-like query shapes, this translated to roughly 5x lower latency and 160x lower memory consumption.
 

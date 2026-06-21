@@ -3,7 +3,7 @@ title: "I'll start with the cliché: 'Hello world!'"
 date: "2021-08-29"
 ---
 
-<img src="https://cdn-images-1.medium.com/max/12032/0*gBBmE6UhqmCNCOEr" width="612"/>
+<img src="/images/posts/hello-world/01.jpeg" width="612"/>
 <small>Photo by <a href='https://unsplash.com/@cdr6934?utm_source=medium&utm_medium=referral'>Chris Ried</a> on Unsplash</small>
 
 The goal of this blog is to document my evolution as a software developer and data analyst. I will mostly write about more technical subjects, but before that an introduction and a foreword are appropriate.

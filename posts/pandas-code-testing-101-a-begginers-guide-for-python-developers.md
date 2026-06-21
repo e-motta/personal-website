@@ -3,7 +3,7 @@ title: "Pandas Code Testing 101: A Beginner’s Guide for Python Developers"
 date: "2023-03-08"
 ---
 
-<img src="https://cdn-images-1.medium.com/max/2178/1*m2IzpR31-9aFo6ROaTwJSw.jpeg" width="612"/>
+<img src="/images/posts/pandas-code-testing-101-a-begginers-guide-for-python-developers/01.jpeg" width="612"/>
 
 Testing is a crucial step in software development. Every programming language has a myriad of tools to make our lives easier when testing our code — and Python is no different.
 

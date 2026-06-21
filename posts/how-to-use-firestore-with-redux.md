@@ -3,7 +3,7 @@ title: "How to use Firestore with Redux in a React application"
 date: "2023-01-09"
 ---
 
-<img src="https://cdn-images-1.medium.com/max/9012/0*WNb40yO0ma4mKbC3" width="612"/>
+<img src="/images/posts/how-to-use-firestore-with-redux/01.jpeg" width="612"/>
 <small>Photo by <a href='https://unsplash.com/@lautaroandreani?utm_source=medium&utm_medium=referral'>Lautaro Andreani</a> on Unsplash</small>
 
 You’re using **Firebase** as your backend-as-a-service platform, with **Firestore** holding your data. You’re building the frontend with **React** and you want to use **Redux** to manage the app’s state.
