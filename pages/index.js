@@ -12,7 +12,7 @@ const introBlocks = [
     content: (
       <p>
         Hi, I&apos;m a <strong>Senior Software Engineer</strong> and{" "}
-        <strong>Tech Lead</strong> with 4+ years of experience in software
+        <strong>Tech Lead</strong> with 5+ years of experience in software
         development.
       </p>
     ),
