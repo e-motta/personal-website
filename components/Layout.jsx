@@ -1,70 +1,155 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import styles from "./Layout.module.css";
-import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import ThemeToggle from "./ThemeToggle";
+import { GITHUB_URL, LINKEDIN_URL, NAME } from "../lib/profile";
+import styles from "./Layout.module.css";
 
-const name = "Eduardo Motta de Moraes";
-export const siteTitle = "Eduardo";
+export const siteTitle = NAME;
 
-export default function Layout({ children, home }) {
+const DEFAULT_DESCRIPTION =
+  "Senior Software Engineer and Tech Lead in Florianópolis. I design and lead backend architectures with Python, FastAPI, PySpark, Kafka, and Kubernetes.";
+
+const NAV = [
+  { href: "/writing", label: "Writing", match: "writing" },
+  { href: "/#experience", label: "Experience", section: "experience" },
+  { href: "/#education", label: "Education", section: "education" },
+];
+
+export default function Layout({ children, title, description }) {
+  const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [section, setSection] = useState(null);
+  const pageTitle = title ? `${title} — ${NAME}` : NAME;
+  const pageDescription = description || DEFAULT_DESCRIPTION;
+  const writingActive =
+    router.pathname === "/writing" || router.pathname.startsWith("/posts");
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [router.asPath]);
+
+  useEffect(() => {
+    if (router.pathname !== "/") {
+      setSection(null);
+      return undefined;
+    }
+
+    const nodes = ["experience", "education"]
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!nodes.length) return undefined;
+
+    const visible = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          visible.set(entry.target.id, entry.isIntersecting);
+        });
+        const current = nodes.find((node) => visible.get(node.id));
+        setSection(current ? current.id : null);
+      },
+      { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.15, 0.4] }
+    );
+
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, [router.pathname]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <div className={styles.container}>
+    <div className={styles.shell}>
       <Head>
+        <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
-        <meta name="theme-color" content="#0d1117" />
+        <meta name="description" content={pageDescription} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
         <meta
           property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
+          content={`https://og-image.vercel.app/${encodeURIComponent(
             siteTitle
-          )}.png?theme=dark&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+          )}.png?theme=light&md=0&fontSize=75px`}
         />
-        <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+      <a className={styles.skip} href="#content">
+        Skip to content
+      </a>
+      <div className={styles.registration} aria-hidden="true" />
       <header className={styles.header}>
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpeg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt="avatar"
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/profile.jpeg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt="avatar"
-              />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">← Back to home</Link>
+        <div className={`container ${styles.headerInner}`}>
+          <Link href="/" className={styles.wordmark}>
+            {NAME}
+          </Link>
+          <button
+            type="button"
+            className={styles.menuButton}
+            aria-expanded={menuOpen}
+            aria-controls="site-nav"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? "Close" : "Menu"}
+          </button>
+          <nav
+            id="site-nav"
+            className={styles.nav}
+            data-open={menuOpen ? "true" : "false"}
+            aria-label="Primary"
+          >
+            <div className={styles.navLinks}>
+              {NAV.map((item) => {
+                const current = item.match
+                  ? writingActive
+                  : section === item.section;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={styles.navLink}
+                    aria-current={current ? (item.match ? "page" : "location") : undefined}
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+              {/* TODO: Point CV at a PDF in the repo once one is added. */}
+              <a
+                className={styles.navLink}
+                href={LINKEDIN_URL}
+                onClick={closeMenu}
+              >
+                CV
+              </a>
+            </div>
+            <span className={styles.divider} aria-hidden="true" />
+            <ThemeToggle />
+          </nav>
         </div>
-      )}
+      </header>
+      <main id="content" tabIndex={-1} className={styles.main}>
+        {children}
+      </main>
+      <footer className={styles.footer}>
+        <div className={`container ${styles.footerInner}`}>
+          <p>© 2026 {NAME}</p>
+          <p className={styles.footerLinks}>
+            <a href={GITHUB_URL} rel="noreferrer">
+              GitHub
+            </a>
+            <span className={styles.slash} aria-hidden="true">
+              /
+            </span>
+            <a href={LINKEDIN_URL} rel="noreferrer">
+              LinkedIn
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
