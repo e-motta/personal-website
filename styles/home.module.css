@@ -151,6 +151,20 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.orgLink {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-border);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+.orgLink:hover,
+.orgLink:focus-visible {
+  text-decoration-color: var(--color-accent);
+}
+
 .bullets {
   display: flex;
   flex-direction: column;

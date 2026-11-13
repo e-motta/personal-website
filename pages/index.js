@@ -15,6 +15,15 @@ import {
 } from "../lib/profile";
 import styles from "../styles/home.module.css";
 
+function SubtleLink({ href, children }) {
+  if (!href) return children;
+  return (
+    <a className={styles.orgLink} href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  );
+}
+
 export default function Home({ posts }) {
   return (
     <Layout>
@@ -96,7 +105,7 @@ export default function Home({ posts }) {
                     <h3 className={styles.roleLine}>
                       <span className={styles.role}>{job.role}</span>
                       {" · "}
-                      {job.company}
+                      <SubtleLink href={job.url}>{job.company}</SubtleLink>
                     </h3>
                     <ul className={styles.bullets}>
                       {job.bullets.map((bullet) => (
@@ -113,7 +122,11 @@ export default function Home({ posts }) {
                 {earlierRoles.map((job) => (
                   <li key={job.dates} className={styles.earlierItem}>
                     <p className={styles.earlierDate}>{job.dates}</p>
-                    <p>{job.line}</p>
+                    <p>
+                      {job.role}
+                      {" · "}
+                      <SubtleLink href={job.url}>{job.company}</SubtleLink>
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -147,7 +160,9 @@ export default function Home({ posts }) {
               {education.map((item) => (
                 <article key={item.title} className={styles.credential}>
                   <p className={styles.credentialTitle}>{item.title}</p>
-                  <p className={styles.issuer}>{item.issuer}</p>
+                  <p className={styles.issuer}>
+                    <SubtleLink href={item.url}>{item.issuer}</SubtleLink>
+                  </p>
                   {item.note ? <p className={styles.note}>{item.note}</p> : null}
                   <p className={styles.years}>{item.years}</p>
                 </article>
@@ -157,8 +172,12 @@ export default function Home({ posts }) {
               <h3 className={styles.groupLabel}>Certifications</h3>
               {certifications.map((item) => (
                 <article key={item.title} className={styles.credential}>
-                  <p className={styles.credentialTitle}>{item.title}</p>
-                  <p className={styles.issuer}>{item.issuer}</p>
+                  <p className={styles.credentialTitle}>
+                    <SubtleLink href={item.url}>{item.title}</SubtleLink>
+                  </p>
+                  <p className={styles.issuer}>
+                    <SubtleLink href={item.issuerUrl}>{item.issuer}</SubtleLink>
+                  </p>
                   <p className={styles.years}>{item.years}</p>
                 </article>
               ))}
