@@ -98,13 +98,6 @@
   text-underline-offset: 0.18em;
 }
 
-.meta {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: var(--text-sm);
-  line-height: var(--leading-sm);
-  color: var(--color-muted);
-}
-
 .links {
   display: flex;
   flex-wrap: wrap;

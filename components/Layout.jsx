@@ -117,14 +117,6 @@ export default function Layout({ children, title, description }) {
                   </Link>
                 );
               })}
-              {/* TODO: Point CV at a PDF in the repo once one is added. */}
-              <a
-                className={styles.navLink}
-                href={LINKEDIN_URL}
-                onClick={closeMenu}
-              >
-                CV
-              </a>
             </div>
             <span className={styles.divider} aria-hidden="true" />
             <ThemeToggle />
@@ -136,7 +128,11 @@ export default function Layout({ children, title, description }) {
       </main>
       <footer className={styles.footer}>
         <div className={`container ${styles.footerInner}`}>
-          <p>© 2026 {NAME}</p>
+          <p className={styles.credit}>
+            <span>© 2026 {NAME}</span>
+            <span>Florianópolis, BR</span>
+            <span>UTC−3</span>
+          </p>
           <p className={styles.footerLinks}>
             <a href={GITHUB_URL} rel="noreferrer">
               GitHub

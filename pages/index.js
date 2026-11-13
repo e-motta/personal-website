@@ -63,7 +63,6 @@ export default function Home({ posts }) {
                   .
                 </p>
               </div>
-              <p className={styles.meta}>Florianópolis, BR · UTC−3</p>
               <p className={styles.links}>
                 <a href={GITHUB_URL} rel="noreferrer">
                   GitHub
