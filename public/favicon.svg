@@ -1,9 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect width="32" height="32" fill="#121212"/>
-  <g transform="translate(4, 25) scale(0.038, -0.038)">
-    <!-- IBM Plex Mono 500 lowercase 'e' -->
-    <path fill="#F3F3F0" d="M311 -12Q252 -12 205.0 7.0Q158 26 126.0 61.0Q94 96 77.0 145.5Q60 195 60 257Q60 319 77.5 369.0Q95 419 126.5 454.5Q158 490 203.0 509.0Q248 528 303 528Q357 528 401.0 509.5Q445 491 476.0 457.0Q507 423 523.5 376.0Q540 329 540 272V231H170V214Q170 153 208.0 114.5Q246 76 313 76Q363 76 398.5 97.5Q434 119 456 155L524 95Q498 50 444.5 19.0Q391 -12 311 -12ZM303 445Q274 445 249.5 435.0Q225 425 207.5 406.5Q190 388 180.0 363.0Q170 338 170 308V301H429V311Q429 372 394.5 408.5Q360 445 303 445Z"/>
+  <!-- IBM Plex Mono 500 '>' glyph -->
+  <!-- Glyph bounds: x 85-515 (430w), y 12-598 (586h) -->
+  <!-- Scale 0.033: ~14px wide, ~19px tall -->
+  <!-- Positioned so pair (> + bar) is centered, > vertical center slightly above tile center -->
+  <g transform="translate(1, 25) scale(0.033, -0.033)">
+    <path fill="#F3F3F0" d="M85 118L416 301V309L85 491V598L515 357V253L85 12Z"/>
   </g>
-  <!-- Yellow underscore bar on baseline -->
-  <rect x="22" y="23" width="6" height="2" fill="#E8B400"/>
+  <!-- Yellow underscore bar: ~10px wide, ~2.5px tall -->
+  <!-- Bottom aligned with bottom of '>' (y≈24.6), starts after '>' with small gap -->
+  <rect x="19" y="22" width="10" height="2.5" fill="#E8B400"/>
 </svg>
