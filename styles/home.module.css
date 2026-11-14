@@ -69,6 +69,20 @@
   content: "\00a0";
 }
 
+.name {
+  display: block;
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-lg);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-muted);
+  margin-bottom: var(--spacing-2);
+}
+
+.name + span::before {
+  content: none;
+}
+
 .heroBody {
   display: flex;
   flex-direction: column;
@@ -316,6 +330,11 @@
 
   .title span + span::before {
     content: none;
+  }
+
+  .name {
+    font-size: var(--text-xl);
+    line-height: var(--leading-xl);
   }
 
   .heroBody {

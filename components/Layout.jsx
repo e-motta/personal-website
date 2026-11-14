@@ -64,7 +64,6 @@ export default function Layout({ children, title, description }) {
     <div className={styles.shell}>
       <Head>
         <title>{pageTitle}</title>
-        <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={pageDescription} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
@@ -82,8 +81,11 @@ export default function Layout({ children, title, description }) {
       <div className={styles.registration} aria-hidden="true" />
       <header className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
-          <Link href="/" className={styles.wordmark}>
-            {NAME}
+          <Link href="/" className={styles.wordmark} aria-label={NAME}>
+            <span className={styles.prompt} aria-hidden="true">&gt;</span>
+            <span className={styles.wordmarkFirst}>Eduardo</span>
+            <span className={styles.wordmarkMiddle}>Motta</span>
+            <span className={styles.wordmarkLast}>de Moraes</span>
           </Link>
           <button
             type="button"
