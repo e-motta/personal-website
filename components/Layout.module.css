@@ -36,7 +36,17 @@
   white-space: nowrap;
 }
 
-.wordmark:hover {
+.wordmark::after {
+  content: "";
+  width: 1ch;
+  height: 0.2em;
+  background: #e8b400;
+  margin-left: 0.15ch;
+  flex: none;
+}
+
+.wordmark:hover .wordmarkName,
+.wordmark:focus-visible .wordmarkName {
   text-decoration-line: underline;
   text-decoration-color: var(--color-accent);
   text-decoration-thickness: 2px;
@@ -63,38 +73,15 @@
   content: none;
 }
 
-.wordmarkFirst::after,
-.wordmarkMiddle::after,
-.wordmarkLast::after {
-  content: "";
-  display: inline-block;
-  width: 1ch;
-  height: 0.2em;
-  background: #e8b400;
-  vertical-align: baseline;
-  margin-left: 0.15ch;
-}
-
-.wordmarkFirst::after,
-.wordmarkMiddle::after {
-  display: none;
-}
-
 @media (max-width: 599px) {
   .wordmarkLast {
     display: none;
-  }
-  .wordmarkMiddle::after {
-    display: inline-block;
   }
 }
 
 @media (max-width: 379px) {
   .wordmarkMiddle {
     display: none;
-  }
-  .wordmarkFirst::after {
-    display: inline-block;
   }
 }
 

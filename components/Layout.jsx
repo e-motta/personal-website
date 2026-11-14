@@ -83,9 +83,11 @@ export default function Layout({ children, title, description }) {
         <div className={`container ${styles.headerInner}`}>
           <Link href="/" className={styles.wordmark} aria-label={NAME}>
             <span className={styles.prompt} aria-hidden="true">&gt;</span>
-            <span className={styles.wordmarkFirst}>Eduardo</span>
-            <span className={styles.wordmarkMiddle}>Motta</span>
-            <span className={styles.wordmarkLast}>de Moraes</span>
+            <span className={styles.wordmarkName}>
+              <span className={styles.wordmarkFirst}>Eduardo</span>
+              <span className={styles.wordmarkMiddle}>Motta</span>
+              <span className={styles.wordmarkLast}>de Moraes</span>
+            </span>
           </Link>
           <button
             type="button"
