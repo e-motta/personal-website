@@ -69,6 +69,10 @@
   content: "\00a0";
 }
 
+.title :global(.sr-only) + span::before {
+  content: none;
+}
+
 .heroBody {
   display: flex;
   flex-direction: column;

@@ -25,9 +25,11 @@
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: baseline;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: var(--text-sm);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   line-height: var(--leading-sm);
   letter-spacing: var(--tracking-normal);
   color: var(--color-fg);
@@ -39,6 +41,61 @@
   text-decoration-color: var(--color-accent);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+}
+
+.prompt {
+  margin-right: 0.5ch;
+}
+
+.wordmarkFirst,
+.wordmarkMiddle,
+.wordmarkLast {
+  display: inline;
+}
+
+.wordmarkFirst::before,
+.wordmarkMiddle::before,
+.wordmarkLast::before {
+  content: "\00a0";
+}
+
+.wordmarkFirst::before {
+  content: none;
+}
+
+.wordmarkFirst::after,
+.wordmarkMiddle::after,
+.wordmarkLast::after {
+  content: "";
+  display: inline-block;
+  width: 1ch;
+  height: 0.2em;
+  background: #e8b400;
+  vertical-align: baseline;
+  margin-left: 0.15ch;
+}
+
+.wordmarkFirst::after,
+.wordmarkMiddle::after {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  .wordmarkLast {
+    display: none;
+  }
+  .wordmarkMiddle::after {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 379px) {
+  .wordmarkMiddle {
+    display: none;
+  }
+  .wordmarkFirst::after {
+    display: inline-block;
+  }
 }
 
 .menuButton {

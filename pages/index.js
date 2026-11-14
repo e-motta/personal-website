@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import PostList from "../components/PostList";
@@ -10,10 +11,23 @@ import {
   GITHUB_URL,
   GOODREADS_URL,
   LINKEDIN_URL,
+  NAME,
   roles,
   STRAVA_URL,
 } from "../lib/profile";
 import styles from "../styles/home.module.css";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Eduardo Motta de Moraes",
+  jobTitle: "Senior Software Engineer",
+  url: "https://www.eduardomotta.dev",
+  sameAs: [
+    "https://github.com/e-motta",
+    "https://www.linkedin.com/in/eduardomottademoraes/"
+  ]
+};
 
 function SubtleLink({ href, children }) {
   if (!href) return children;
@@ -27,6 +41,12 @@ function SubtleLink({ href, children }) {
 export default function Home({ posts }) {
   return (
     <Layout>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+      </Head>
       <section className={`${styles.section} ${styles.about}`} id="about" aria-labelledby="about-label">
         <div className={`container ${styles.grid}`}>
           <h2 id="about-label" className={styles.kicker}>
@@ -44,7 +64,7 @@ export default function Home({ posts }) {
               />
             </div>
             <h1 className={styles.title}>
-              <span>Senior Software Engineer</span>
+              <span className="sr-only">{NAME}, </span><span>Senior Software Engineer</span>
               <span>& Tech Lead</span>
             </h1>
             <div className={styles.heroBody}>

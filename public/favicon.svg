@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" fill="#121212"/>
+  <!-- IBM Plex Mono 500 '>' glyph -->
+  <!-- Glyph bounds: x 85-515 (430w), y 12-598 (586h) -->
+  <!-- Scale 0.033: ~14px wide, ~19px tall -->
+  <!-- Positioned so pair (> + bar) is centered, > vertical center slightly above tile center -->
+  <g transform="translate(1, 25) scale(0.033, -0.033)">
+    <path fill="#F3F3F0" d="M85 118L416 301V309L85 491V598L515 357V253L85 12Z"/>
+  </g>
+  <!-- Yellow underscore bar: ~10px wide, ~2.5px tall -->
+  <!-- Bottom aligned with bottom of '>' (y≈24.6), starts after '>' with small gap -->
+  <rect x="19" y="22" width="10" height="2.5" fill="#E8B400"/>
+</svg>
