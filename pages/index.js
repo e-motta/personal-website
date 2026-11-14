@@ -64,8 +64,7 @@ export default function Home({ posts }) {
               />
             </div>
             <h1 className={styles.title}>
-              <span className="sr-only">{NAME} — </span>
-              <span>Senior Software Engineer</span>
+              <span className="sr-only">{NAME}, </span><span>Senior Software Engineer</span>
               <span>& Tech Lead</span>
             </h1>
             <div className={styles.heroBody}>
