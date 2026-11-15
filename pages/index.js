@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PostList from "../components/PostList";
 import Layout from "../components/Layout";
+import { umamiEventProps } from "../lib/analytics";
 import { getSortedPostsData } from "../lib/posts";
 import {
   earlierRoles,
@@ -29,10 +30,16 @@ const personJsonLd = {
   ]
 };
 
-function SubtleLink({ href, children }) {
+function SubtleLink({ href, location, children }) {
   if (!href) return children;
   return (
-    <a className={styles.orgLink} href={href} target="_blank" rel="noopener noreferrer">
+    <a
+      className={styles.orgLink}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...umamiEventProps(href, { location })}
+    >
       {children}
     </a>
   );
@@ -82,21 +89,29 @@ export default function Home({ posts }) {
                 </p>
                 <p>
                   In my free time, I enjoy{" "}
-                  <a href={GOODREADS_URL} rel="noreferrer">
+                  <a href={GOODREADS_URL} rel="noreferrer" {...umamiEventProps(GOODREADS_URL, { location: "home" })}>
                     reading
                   </a>{" "}
                   and{" "}
-                  <a href={STRAVA_URL} rel="noreferrer">
+                  <a href={STRAVA_URL} rel="noreferrer" {...umamiEventProps(STRAVA_URL, { location: "home" })}>
                     running
                   </a>
                   .
                 </p>
               </div>
               <p className={styles.links}>
-                <a href={GITHUB_URL} rel="noreferrer">
+                <a
+                  href={GITHUB_URL}
+                  rel="noreferrer"
+                  {...umamiEventProps(GITHUB_URL, { event: "outbound-github", location: "home" })}
+                >
                   GitHub
                 </a>
-                <a href={LINKEDIN_URL} rel="noreferrer">
+                <a
+                  href={LINKEDIN_URL}
+                  rel="noreferrer"
+                  {...umamiEventProps(LINKEDIN_URL, { event: "outbound-linkedin", location: "home" })}
+                >
                   LinkedIn
                 </a>
               </p>
@@ -125,7 +140,9 @@ export default function Home({ posts }) {
                     <h3 className={styles.roleLine}>
                       <span className={styles.role}>{job.role}</span>
                       {" · "}
-                      <SubtleLink href={job.url}>{job.company}</SubtleLink>
+                      <SubtleLink href={job.url} location="experience">
+                        {job.company}
+                      </SubtleLink>
                     </h3>
                     <ul className={styles.bullets}>
                       {job.bullets.map((bullet) => (
@@ -145,7 +162,9 @@ export default function Home({ posts }) {
                     <p>
                       {job.role}
                       {" · "}
-                      <SubtleLink href={job.url}>{job.company}</SubtleLink>
+                      <SubtleLink href={job.url} location="experience">
+                        {job.company}
+                      </SubtleLink>
                     </p>
                   </li>
                 ))}
@@ -181,7 +200,9 @@ export default function Home({ posts }) {
                 <article key={item.title} className={styles.credential}>
                   <p className={styles.credentialTitle}>{item.title}</p>
                   <p className={styles.issuer}>
-                    <SubtleLink href={item.url}>{item.issuer}</SubtleLink>
+                    <SubtleLink href={item.url} location="education">
+                      {item.issuer}
+                    </SubtleLink>
                   </p>
                   {item.note ? <p className={styles.note}>{item.note}</p> : null}
                   <p className={styles.years}>{item.years}</p>
@@ -193,10 +214,14 @@ export default function Home({ posts }) {
               {certifications.map((item) => (
                 <article key={item.title} className={styles.credential}>
                   <p className={styles.credentialTitle}>
-                    <SubtleLink href={item.url}>{item.title}</SubtleLink>
+                    <SubtleLink href={item.url} location="education">
+                      {item.title}
+                    </SubtleLink>
                   </p>
                   <p className={styles.issuer}>
-                    <SubtleLink href={item.issuerUrl}>{item.issuer}</SubtleLink>
+                    <SubtleLink href={item.issuerUrl} location="education">
+                      {item.issuer}
+                    </SubtleLink>
                   </p>
                   <p className={styles.years}>{item.years}</p>
                 </article>

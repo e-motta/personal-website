@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { umamiEventProps } from "../lib/analytics";
 import styles from "../styles/post.module.css";
 
 function PostImage({ src, alt, width, height }) {
@@ -26,7 +27,12 @@ export const mdxComponents = {
   a: ({ href, children, ...props }) => {
     const external = typeof href === "string" && /^https?:/.test(href);
     return (
-      <a href={href} {...props} {...(external ? { rel: "noreferrer" } : {})}>
+      <a
+        href={href}
+        {...props}
+        {...(external ? { rel: "noreferrer" } : {})}
+        {...umamiEventProps(href, { location: "post" })}
+      >
         {children}
       </a>
     );
