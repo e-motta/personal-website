@@ -1,14 +1,41 @@
+import { useEffect, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote";
 import Layout from "../../components/Layout";
 import TableOfContents from "../../components/TableOfContents";
 import { mdxComponents } from "../../components/mdx";
+import { trackUmamiClick, umamiEventProps } from "../../lib/analytics";
 import { formatMetaDate } from "../../lib/dates";
 import { getAllPostIds, getPostData, getSortedPostsData } from "../../lib/posts";
 import styles from "../../styles/post.module.css";
 
+function stampPostLinks(root) {
+  root.querySelectorAll("a[href]").forEach((anchor) => {
+    if (anchor.hasAttribute("data-umami-event")) return;
+    const props = umamiEventProps(anchor.getAttribute("href"), { location: "post" });
+    Object.entries(props).forEach(([name, value]) => {
+      anchor.setAttribute(name, value);
+    });
+  });
+}
+
+function onProseClick(event) {
+  const target = event.target;
+  if (!target || typeof target.closest !== "function") return;
+  const anchor = target.closest("a");
+  if (!anchor || !event.currentTarget.contains(anchor)) return;
+  if (anchor.hasAttribute("data-umami-event")) return;
+  trackUmamiClick(anchor.getAttribute("href"), "post");
+}
+
 export default function Post({ postData, newer, older }) {
+  const proseRef = useRef(null);
+
+  useEffect(() => {
+    if (proseRef.current) stampPostLinks(proseRef.current);
+  }, [postData.id]);
+
   return (
     <Layout title={postData.title} description={postData.excerpt}>
       <Head>
@@ -23,7 +50,7 @@ export default function Post({ postData, newer, older }) {
             {postData.minutes} min read
           </p>
           <h1 className={styles.title}>{postData.title}</h1>
-          <div className={styles.prose}>
+          <div className={styles.prose} ref={proseRef} onClick={onProseClick}>
             <MDXRemote {...postData.contentHtml} components={mdxComponents} />
           </div>
           <nav className={styles.pager} aria-label="More posts">

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ThemeToggle from "./ThemeToggle";
+import { umamiEventProps } from "../lib/analytics";
 import { GITHUB_URL, LINKEDIN_URL, NAME } from "../lib/profile";
 import styles from "./Layout.module.css";
 
@@ -138,13 +139,27 @@ export default function Layout({ children, title, description }) {
             <span>UTC−3</span>
           </p>
           <p className={styles.footerLinks}>
-            <a href={GITHUB_URL} rel="noreferrer">
+            <a
+              href={GITHUB_URL}
+              rel="noreferrer"
+              {...umamiEventProps(GITHUB_URL, {
+                event: "outbound-github",
+                location: "footer",
+              })}
+            >
               GitHub
             </a>
             <span className={styles.slash} aria-hidden="true">
               /
             </span>
-            <a href={LINKEDIN_URL} rel="noreferrer">
+            <a
+              href={LINKEDIN_URL}
+              rel="noreferrer"
+              {...umamiEventProps(LINKEDIN_URL, {
+                event: "outbound-linkedin",
+                location: "footer",
+              })}
+            >
               LinkedIn
             </a>
           </p>
