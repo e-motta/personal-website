@@ -5,12 +5,8 @@ import { useRouter } from "next/router";
 import ThemeToggle from "./ThemeToggle";
 import { umamiEventProps } from "../lib/analytics";
 import { GITHUB_URL, LINKEDIN_URL, NAME } from "../lib/profile";
+import { absoluteUrl, PROFILE_IMAGE, SITE_DESCRIPTION } from "../lib/seo";
 import styles from "./Layout.module.css";
-
-export const siteTitle = NAME;
-
-const DEFAULT_DESCRIPTION =
-  "Senior Software Engineer and Tech Lead in Florianópolis. I design and lead backend architectures with Python, FastAPI, PySpark, Kafka, and Kubernetes.";
 
 const NAV = [
   { href: "/writing", label: "Writing", match: "writing" },
@@ -18,12 +14,28 @@ const NAV = [
   { href: "/#education", label: "Education", section: "education" },
 ];
 
-export default function Layout({ children, title, description }) {
+export default function Layout({
+  children,
+  title,
+  description,
+  image,
+  ogType = "website",
+  canonical = true,
+}) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [section, setSection] = useState(null);
   const pageTitle = title ? `${title} — ${NAME}` : NAME;
-  const pageDescription = description || DEFAULT_DESCRIPTION;
+  const pageDescription = description || SITE_DESCRIPTION;
+  const social = image || PROFILE_IMAGE;
+  const imageUrl = absoluteUrl(social.src);
+  const pageUrl = absoluteUrl(router.asPath || "/");
+  const imageAlt = social.alt || PROFILE_IMAGE.alt;
+  const imageWidth = Number(social.width);
+  const imageHeight = Number(social.height);
+  const twitterCard =
+    social.card ||
+    (imageWidth / imageHeight >= 1.4 ? "summary_large_image" : "summary");
   const writingActive =
     router.pathname === "/writing" || router.pathname.startsWith("/posts");
 
@@ -65,16 +77,29 @@ export default function Layout({ children, title, description }) {
     <div className={styles.shell}>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURIComponent(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta key="description" name="description" content={pageDescription} />
+        {canonical ? <link key="canonical" rel="canonical" href={pageUrl} /> : null}
+        <meta key="og:type" property="og:type" content={ogType} />
+        <meta key="og:site_name" property="og:site_name" content={NAME} />
+        <meta key="og:url" property="og:url" content={pageUrl} />
+        <meta key="og:title" property="og:title" content={pageTitle} />
+        <meta key="og:description" property="og:description" content={pageDescription} />
+        <meta key="og:image" property="og:image" content={imageUrl} />
+        <meta key="og:image:alt" property="og:image:alt" content={imageAlt} />
+        {social.type ? (
+          <meta key="og:image:type" property="og:image:type" content={social.type} />
+        ) : null}
+        {imageWidth > 0 ? (
+          <meta key="og:image:width" property="og:image:width" content={String(imageWidth)} />
+        ) : null}
+        {imageHeight > 0 ? (
+          <meta key="og:image:height" property="og:image:height" content={String(imageHeight)} />
+        ) : null}
+        <meta key="twitter:card" name="twitter:card" content={twitterCard} />
+        <meta key="twitter:title" name="twitter:title" content={pageTitle} />
+        <meta key="twitter:description" name="twitter:description" content={pageDescription} />
+        <meta key="twitter:image" name="twitter:image" content={imageUrl} />
+        <meta key="twitter:image:alt" name="twitter:image:alt" content={imageAlt} />
       </Head>
       <a className={styles.skip} href="#content">
         Skip to content
