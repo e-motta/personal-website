@@ -8,7 +8,38 @@ import { mdxComponents } from "../../components/mdx";
 import { trackUmamiClick, umamiEventProps } from "../../lib/analytics";
 import { formatMetaDate } from "../../lib/dates";
 import { getAllPostIds, getPostData, getSortedPostsData } from "../../lib/posts";
+import { NAME } from "../../lib/profile";
+import { absoluteUrl, jsonLdScript, SITE_URL } from "../../lib/seo";
 import styles from "../../styles/post.module.css";
+
+function postJsonLd(post) {
+  const url = absoluteUrl(`/posts/${post.id}`);
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: NAME,
+      url: SITE_URL,
+    },
+    mainEntityOfPage: url,
+    url,
+  };
+  if (post.socialImage) {
+    data.image = [
+      {
+        "@type": "ImageObject",
+        url: absoluteUrl(post.socialImage.src),
+        width: post.socialImage.width,
+        height: post.socialImage.height,
+      },
+    ];
+  }
+  return data;
+}
 
 function stampPostLinks(root) {
   root.querySelectorAll("a[href]").forEach((anchor) => {
@@ -37,9 +68,18 @@ export default function Post({ postData, newer, older }) {
   }, [postData.id]);
 
   return (
-    <Layout title={postData.title} description={postData.excerpt}>
+    <Layout
+      title={postData.title}
+      description={postData.excerpt}
+      image={postData.socialImage}
+      ogType="article"
+    >
       <Head>
         <meta property="article:published_time" content={postData.date} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(postJsonLd(postData)) }}
+        />
       </Head>
       <div className={styles.article}>
         <TableOfContents headings={postData.headings} />

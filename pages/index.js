@@ -16,18 +16,33 @@ import {
   roles,
   STRAVA_URL,
 } from "../lib/profile";
+import { jsonLdScript, profileImageObject, SITE_DESCRIPTION, SITE_URL } from "../lib/seo";
 import styles from "../styles/home.module.css";
 
-const personJsonLd = {
+const profileImage = profileImageObject();
+
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Eduardo Motta de Moraes",
-  jobTitle: "Senior Software Engineer",
-  url: "https://www.eduardomotta.dev",
-  sameAs: [
-    "https://github.com/e-motta",
-    "https://www.linkedin.com/in/eduardomottademoraes/"
-  ]
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: NAME,
+      jobTitle: "Senior Software Engineer",
+      url: SITE_URL,
+      image: profileImage,
+      sameAs: [GITHUB_URL, LINKEDIN_URL],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/#webpage`,
+      url: SITE_URL,
+      name: NAME,
+      description: SITE_DESCRIPTION,
+      primaryImageOfPage: profileImage,
+      mainEntity: { "@id": `${SITE_URL}/#person` },
+    },
+  ],
 };
 
 function SubtleLink({ href, location, children }) {
@@ -51,7 +66,7 @@ export default function Home({ posts }) {
       <Head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(structuredData) }}
         />
       </Head>
       <section className={`${styles.section} ${styles.about}`} id="about" aria-labelledby="about-label">
@@ -235,6 +250,8 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
+  const { assertProfileImage } = await import("../lib/image-size");
+  assertProfileImage();
   const allPostsData = getSortedPostsData();
   return {
     props: {
