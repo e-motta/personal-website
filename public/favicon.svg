@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <rect width="32" height="32" fill="#121212"/>
-  <!-- IBM Plex Mono 500 '>' at 82.5% of the previous glyph, stroke scaled with it. -->
-  <!-- Glyph bounds x 85-515, y 12-598. The > and _ pair is centered in the tile. -->
-  <g transform="translate(2.3325, 24.3036) scale(0.027225, -0.027225)">
+  <!-- IBM Plex Mono 500 '>' and typographic '_' (below the baseline). -->
+  <!-- Underscore uses the font's '_' metrics (y -85 to -179, width 480). -->
+  <!-- Ink gap 50 font units; scale 0.025; pair centered with 4px side padding. -->
+  <g transform="translate(1.875, 21.2375) scale(0.025, -0.025)">
     <path fill="#F3F3F0" d="M85 118L416 301V309L85 491V598L515 357V253L85 12Z"/>
   </g>
-  <!-- Underscore stays 10x2.5 and shares the chevron's baseline. -->
-  <rect x="17.3534" y="21.4769" width="10" height="2.5" fill="#E8B400"/>
+  <rect x="16" y="23.3625" width="12" height="2.35" fill="#E8B400"/>
 </svg>
