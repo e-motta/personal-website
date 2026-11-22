@@ -38,11 +38,15 @@
 
 .wordmark::after {
   content: "";
-  width: 1ch;
-  height: 0.2em;
-  background: #e8b400;
+  /* IBM Plex Mono 500 "_" ink: 480×94 units, bottom 179 below the baseline.
+     Same metrics as the favicon, so the cursor sits fully under the baseline. */
+  width: 0.48em;
+  height: 0.094em;
   margin-left: 0.15ch;
+  background: #e8b400;
   flex: none;
+  /* Baseline alignment pins this empty box's bottom to the text baseline. */
+  transform: translateY(0.179em);
 }
 
 .wordmark:hover .wordmarkName,
